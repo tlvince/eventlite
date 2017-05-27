@@ -72,9 +72,13 @@ const fetchEvents = () => {
 
   const url = `${api}?${stringify(query)}`
 
-  return window.fetch(url)
+  return fetch(url)
     .then(res => res.json())
     .then(res => parseEvents(res.events))
+    .then(events => {
+      localStorage.setItem('events', JSON.stringify(events))
+      return events
+    })
 }
 
 export const getEvents = () => dispatch => {
