@@ -4,6 +4,7 @@ import { stringify } from 'querystringify'
 
 const REQUEST_EVENTS = 'app/REQUEST_EVENTS'
 const RECEIVE_EVENTS = 'app/RECEIVE_EVENTS'
+const HIDE_EVENT = 'app/HIDE_EVENT'
 
 const initialState = {
   fetching: false
@@ -21,6 +22,15 @@ export default (state = initialState, {type, ...actionProps}) => {
         ...state,
         fetching: false,
         ...actionProps
+      }
+    case HIDE_EVENT:
+      const nextEvents = {}
+      nextEvents[actionProps.date] = state.events[actionProps.date]
+        .filter(event => event.id !== actionProps.id)
+
+      return {
+        ...state,
+        events: {...state.events, ...nextEvents}
       }
     default:
       return state
@@ -78,10 +88,6 @@ const fetchEvents = () => {
   return fetch(url)
     .then(res => res.json())
     .then(res => parseEvents(res.events))
-    .then(events => {
-      localStorage.setItem('events', JSON.stringify(events))
-      return events
-    })
 }
 
 export const getEvents = () => dispatch => {
@@ -89,3 +95,9 @@ export const getEvents = () => dispatch => {
   return fetchEvents()
     .then(events => dispatch({type: RECEIVE_EVENTS, events}))
 }
+
+export const hideEvent = ({id, date}) => dispatch => dispatch({
+  type: HIDE_EVENT,
+  id,
+  date
+})

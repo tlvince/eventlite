@@ -2,7 +2,7 @@ import React from 'react'
 
 import './event.css'
 
-const Event = ({event}) =>
+const Event = ({event, hideEvent}) =>
   <li>
     <time>{event.time}</time>
     <a
@@ -12,6 +12,11 @@ const Event = ({event}) =>
     >{event.name}</a>
     <p>{event.location}</p>
     <small>{event.category && '#' + event.category}</small> <small>{event.format && '#' + event.format}</small>
+    <p>
+      <small>
+        <a href='#' onClick={() => hideEvent(event)}>Hide</a>
+      </small>
+    </p>
   </li>
 
 export default Event

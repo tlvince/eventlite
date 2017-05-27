@@ -3,25 +3,20 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import { createStore, applyMiddleware } from 'redux'
 
 import rootReducer from './root-reducer'
+import localstorageMiddleware from './localstorage-middleware'
 
 const getPreloadedState = () => {
-  const rawEvents = localStorage.getItem('events')
-  if (!rawEvents) {
-    return {
-      app: {}
-    }
+  const rawState = localStorage.getItem('state')
+  if (!rawState) {
+    return
   }
-  const events = JSON.parse(rawEvents)
-  return {
-    app: {
-      events
-    }
-  }
+  return JSON.parse(rawState)
 }
 
 const getStoreEnhancers = () => {
   const middlewares = [
-    thunkMiddleware
+    thunkMiddleware,
+    localstorageMiddleware
   ]
 
   const appliedMiddlewares = applyMiddleware(...middlewares)

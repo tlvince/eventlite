@@ -1,8 +1,8 @@
 import React from 'react'
 
-import Event from './Event'
-
 import './events.css'
+import Event from './Event'
+import EventContainer from './EventContainer'
 
 const Events = ({events}) => {
   if (!events) {
@@ -13,7 +13,7 @@ const Events = ({events}) => {
       <li key={date}>
         <h3>{date}</h3>
         <ul>{events[date].map(event => (
-          <Event event={event} key={event.id} />
+          <EventContainer event={event} key={event.id} />
         ))}</ul>
       </li>
     ))}</ul>
