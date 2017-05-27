@@ -5,16 +5,20 @@ import Events from './Events'
 const App = ({
   events,
   fetching,
-  onGetEvents
+  getEvents,
+  onNextPage
 }) =>
   <div>
     <h1>Eventlite</h1>
     <button
-      onClick={onGetEvents}
+      onClick={getEvents}
       disabled={fetching}
     >{events ? 'Update' : 'Get'} Events</button>
     <h2>Events</h2>
-    <Events events={events} />
+    <Events
+      events={events}
+      onNextPage={onNextPage}
+    />
   </div>
 
 export default App

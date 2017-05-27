@@ -5,6 +5,7 @@ import { stringify } from 'querystringify'
 const REQUEST_EVENTS = 'app/REQUEST_EVENTS'
 const RECEIVE_EVENTS = 'app/RECEIVE_EVENTS'
 const HIDE_EVENT = 'app/HIDE_EVENT'
+const SAVE_PAGINATION = 'app/SAVE_PAGINATION'
 
 const initialState = {
   fetching: false
@@ -18,10 +19,24 @@ export default (state = initialState, {type, ...actionProps}) => {
         fetching: true
       }
     case RECEIVE_EVENTS:
+      const prevEvents = {
+        ...state.events
+      }
+      const events = Object.keys(actionProps.events).reduce((index, date) => {
+        if (index[date]) {
+          index[date] = [
+            ...index[date],
+            ...actionProps.events[date]
+          ]
+          return index
+        }
+        index[date] = [...actionProps.events[date]]
+        return index
+      }, prevEvents)
       return {
         ...state,
         fetching: false,
-        ...actionProps
+        events
       }
     case HIDE_EVENT:
       const nextEvents = {}
@@ -31,6 +46,11 @@ export default (state = initialState, {type, ...actionProps}) => {
       return {
         ...state,
         events: {...state.events, ...nextEvents}
+      }
+    case SAVE_PAGINATION:
+      return {
+        ...state,
+        ...actionProps
       }
     default:
       return state
@@ -70,7 +90,7 @@ const parseEvents = events => {
     }, {})
 }
 
-const fetchEvents = () => {
+const fetchEvents = page => {
   const api = 'https://www.eventbriteapi.com/v3/events/search/'
 
   const query = {
@@ -83,17 +103,24 @@ const fetchEvents = () => {
     expand: 'category,format,venue'
   }
 
+  if (page) {
+    query.page = page
+  }
+
   const url = `${api}?${stringify(query)}`
 
   return fetch(url)
     .then(res => res.json())
-    .then(res => parseEvents(res.events))
 }
 
-export const getEvents = () => dispatch => {
+export const getEvents = page => dispatch => {
   dispatch({type: REQUEST_EVENTS})
-  return fetchEvents()
-    .then(events => dispatch({type: RECEIVE_EVENTS, events}))
+  return fetchEvents(page)
+    .then(res => {
+      dispatch({type: SAVE_PAGINATION, pagination: res.pagination})
+      const events = parseEvents(res.events)
+      dispatch({type: RECEIVE_EVENTS, events})
+    })
 }
 
 export const hideEvent = ({id, date}) => dispatch => dispatch({
