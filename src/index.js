@@ -4,7 +4,6 @@ import { render } from 'react-dom'
 import registerServiceWorker from './registerServiceWorker'
 
 import Root from './Root'
-import './index.css'
 
 const root = document.getElementById('root')
 

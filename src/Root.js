@@ -4,7 +4,9 @@ import { Provider } from 'react-redux'
 import AppContainer from './app/AppContainer'
 import store from './store'
 
-export default () =>
+const Root = () =>
   <Provider store={store}>
     <AppContainer />
   </Provider>
+
+export default Root
