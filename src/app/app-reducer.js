@@ -1,4 +1,5 @@
 import dlv from 'dlv'
+import format from 'date-fns/format'
 import { stringify } from 'querystringify'
 
 const REQUEST_EVENTS = 'app/REQUEST_EVENTS'
@@ -40,19 +41,21 @@ const parseEvents = events => {
 
   return events
     .map(event => Object.keys(fields).reduce((index, key) => {
-      const value = fields[key]
-      index[key] = dlv(event, value)
+      index[key] = dlv(event, fields[key])
       return index
     }, {}))
+    .map(event => ({
+      ...event,
+      url: event.url.split('?')[0],
+      date: format(event.date, 'dddd'),
+      time: format(event.date, 'HH:mm'),
+      location: event.venue ? `${event.venue}, ${event.location}` : event.location
+    }))
     .reduce((index, event) => {
-      if (!event.date) {
-        return index
+      if (!index[event.date]) {
+        index[event.date] = []
       }
-      const date = event.date.split('T')[0]
-      if (!index[date]) {
-        index[date] = []
-      }
-      index[date].push(event)
+      index[event.date].push(event)
       return index
     }, {})
 }
