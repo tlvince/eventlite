@@ -7,3 +7,6 @@ time {
 li {
   margin: 1em 0;
 }
+.hide {
+  cursor: pointer;
+}

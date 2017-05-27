@@ -13,9 +13,7 @@ const Event = ({event, hideEvent}) =>
     <p>{event.location}</p>
     <small>{event.category && '#' + event.category}</small> <small>{event.format && '#' + event.format}</small>
     <p>
-      <small>
-        <a href='#' onClick={() => hideEvent(event)}>Hide</a>
-      </small>
+      <small className='hide' onClick={() => hideEvent(event)}>Hide</small>
     </p>
   </li>
 
