@@ -37,5 +37,9 @@
   "bugs": {
     "url": "https://github.com/tlvince/eventlite/issues"
   },
-  "homepage": "https://eventlite.tlvince.com"
+  "homepage": "https://eventlite.tlvince.com",
+  "engines": {
+    "npm": "5.0.2",
+    "node": "6.10.3"
+  }
 }
