@@ -63,8 +63,6 @@ const parseEvents = events => {
     url: 'url',
     name: 'name.text',
     date: 'start.local',
-    venue: 'venue.name',
-    location: 'venue.address.localized_address_display',
     format: 'format.short_name_localized',
     category: 'category.short_name_localized'
   }
@@ -78,8 +76,7 @@ const parseEvents = events => {
       ...event,
       url: event.url.split('?')[0],
       date: format(event.date, 'dddd'),
-      time: format(event.date, 'HH:mm'),
-      location: event.venue ? `${event.venue}, ${event.location}` : event.location
+      time: format(event.date, 'HH:mm')
     }))
     .reduce((index, event) => {
       if (!index[event.date]) {
@@ -100,7 +97,7 @@ const fetchEvents = page => {
     'location.longitude': '-0.0574745',
     price: 'free',
     token: `${process.env.REACT_APP_EVENTBRITE_TOKEN}`,
-    expand: 'category,format,venue'
+    expand: 'category,format'
   }
 
   if (page) {
