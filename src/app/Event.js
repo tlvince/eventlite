@@ -10,7 +10,7 @@ const Event = ({event, hideEvent}) =>
       href={event.url.split('?')[0]}
       target="_blank"
     >{event.name}</a>
-    <p><small>{event.category && '#' + event.category}</small> <small>{event.format && '#' + event.format}</small></p>
+    <p><small>{event.tags}</small></p>
     <p><small className='hide' onClick={() => hideEvent(event)}>Hide</small></p>
   </li>
 

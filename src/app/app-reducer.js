@@ -76,7 +76,8 @@ const parseEvents = events => {
       ...event,
       url: event.url.split('?')[0],
       date: format(event.date, 'dddd'),
-      time: format(event.date, 'HH:mm')
+      time: format(event.date, 'HH:mm'),
+      tags: event.category && event.format ? `#${event.category} #${event.format}` : '(no tags)'
     }))
     .reduce((index, event) => {
       if (!index[event.date]) {
