@@ -17,6 +17,7 @@
   "scripts": {
     "build": "microbundle --compress=false --sourcemap=false -f cjs --jsx React.createElement -o dist",
     "postbuild": "rm -rf build && mkdir build",
+    "poststart": "echo eventlite.tlvince.com > build/CNAME",
     "prestart": "npm run build",
     "start": "node -r dotenv/config dist/eventlite.js > build/index.html"
   },
