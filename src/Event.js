@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 
 const Event = ({event}) =>
-  <li>
+  <Fragment>
     <time>{event.time}</time>
     <main>
       <a
@@ -11,6 +11,6 @@ const Event = ({event}) =>
       >{event.name}</a>
     </main>
     <small>{event.tags}</small>
-  </li>
+  </Fragment>
 
 export default Event

@@ -1,9 +1,9 @@
 import React from 'react'
-import ReactDOMServer from 'react-dom/server'
+import { renderToStaticMarkup } from 'react-dom/server'
 import Events from './Events'
 
 export default events => {
-  const listings = ReactDOMServer.renderToStaticMarkup(<Events events={events} />)
+  const listings = renderToStaticMarkup(<Events events={events} />)
   const html =
 `<!DOCTYPE html>
 <html>

@@ -15,7 +15,7 @@
     "microbundle": "0.4.4"
   },
   "scripts": {
-    "build": "microbundle --compress=false --sourcemap=false -f cjs --jsx React.createElement -o dist",
+    "build": "microbundle --external all --compress false --sourcemap false -f cjs --jsx React.createElement -o dist",
     "postbuild": "rm -rf build && mkdir build",
     "poststart": "echo eventlite.tlvince.com > build/CNAME",
     "prestart": "npm run build",
