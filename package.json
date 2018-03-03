@@ -1,29 +1,27 @@
 {
   "name": "eventlite",
-  "private": true,
   "dependencies": {
-    "date-fns": "^1.28.5",
-    "dlv": "^1.1.0",
-    "querystringify": "^1.0.0",
-    "react": "^15.5.4",
-    "react-dom": "^15.5.4",
-    "react-redux": "^5.0.5",
-    "redux": "^3.6.0",
-    "redux-devtools-extension": "^2.13.2",
-    "redux-thunk": "^2.2.0"
+    "date-fns": "1.29.0",
+    "delay": "2.0.0",
+    "dlv": "1.1.1",
+    "p-series": "1.0.0",
+    "querystringify": "1.0.0",
+    "react": "16.2.0",
+    "react-dom": "16.2.0",
+    "simple-get-promise": "1.0.2"
   },
   "devDependencies": {
-    "react-scripts": "1.0.7"
+    "dotenv": "5.0.1",
+    "microbundle": "0.4.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "echo react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "build": "microbundle --compress=false --sourcemap=false -f cjs --jsx React.createElement -o dist",
+    "postbuild": "rm -rf build && mkdir build",
+    "prestart": "npm run build",
+    "start": "node -r dotenv/config dist/eventlite.js > build/index.html"
   },
   "description": "Lightweight Eventbrite",
-  "version": "1.0.0",
-  "main": "src/index.js",
+  "version": "2.0.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/tlvince/eventlite.git"
