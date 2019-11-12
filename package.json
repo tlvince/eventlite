@@ -1,28 +1,15 @@
 {
   "name": "eventlite",
-  "dependencies": {
-    "date-fns": "1.29.0",
-    "delay": "2.0.0",
-    "dlv": "1.1.1",
-    "p-series": "1.0.0",
-    "querystringify": "1.0.0",
-    "react": "16.2.0",
-    "react-dom": "16.2.0",
-    "simple-get-promise": "1.0.2"
-  },
-  "devDependencies": {
-    "dotenv": "5.0.1",
-    "microbundle": "0.4.4"
-  },
+  "description": "Lightweight Eventbrite",
+  "version": "2.0.0",
   "scripts": {
     "build": "microbundle --external all --compress false --sourcemap false -f cjs --jsx React.createElement -o dist",
+    "lint": "eslint '*.js' 'src/**/*.js'",
     "postbuild": "rm -rf build && mkdir build",
     "poststart": "echo eventlite.tlvince.com > build/CNAME",
     "prestart": "npm run build",
     "start": "node -r dotenv/config dist/eventlite.js > build/index.html"
   },
-  "description": "Lightweight Eventbrite",
-  "version": "2.0.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/tlvince/eventlite.git"
@@ -38,7 +25,30 @@
   },
   "homepage": "https://eventlite.tlvince.com",
   "engines": {
-    "npm": "5.0.2",
-    "node": "6.10.3"
+    "npm": ">=6.12",
+    "node": ">=10"
+  },
+  "dependencies": {
+    "date-fns": "1.29.0",
+    "delay": "2.0.0",
+    "dlv": "1.1.1",
+    "p-series": "1.0.0",
+    "querystringify": "1.0.0",
+    "react": "16.2.0",
+    "react-dom": "16.2.0",
+    "simple-get-promise": "1.0.2"
+  },
+  "devDependencies": {
+    "@commitlint/config-conventional": "8.2.0",
+    "commitlint": "8.2.0",
+    "dotenv": "5.0.1",
+    "eslint": "6.6.0",
+    "eslint-config-prettier": "6.5.0",
+    "eslint-plugin-prettier": "3.1.1",
+    "eslint-plugin-react": "7.16.0",
+    "husky": "3.0.9",
+    "lint-staged": "9.4.2",
+    "microbundle": "0.4.4",
+    "prettier": "1.19.1"
   }
 }

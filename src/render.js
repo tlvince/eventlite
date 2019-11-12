@@ -4,8 +4,7 @@ import Events from './Events'
 
 export default events => {
   const listings = renderToStaticMarkup(<Events events={events} />)
-  const html =
-`<!DOCTYPE html>
+  const html = `<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8" />

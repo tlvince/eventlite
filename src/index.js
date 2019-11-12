@@ -17,7 +17,7 @@ const fetchEvents = page => {
     'location.longitude': '-0.0574745',
     price: 'free',
     token: process.env.EVENTBRITE_TOKEN,
-    expand: 'category,format'
+    expand: 'category,format',
   }
 
   if (page) {
@@ -35,20 +35,27 @@ const parseEvents = events => {
     name: 'name.text',
     date: 'start.local',
     format: 'format.short_name_localized',
-    category: 'category.short_name_localized'
+    category: 'category.short_name_localized',
   }
 
   return events
-    .map(event => Object.keys(fields).reduce((index, key) => {
-      index[key] = dlv(event, fields[key])
-      return index
-    }, {}))
-    .map(event => Object.assign({}, event, {
-      url: event.url.split('?')[0],
-      date: format(event.date, 'dddd, Do MMMM'),
-      time: format(event.date, 'HH:mm'),
-      tags: event.category && event.format ? `#${event.category} #${event.format}` : '(no tags)'
-    }))
+    .map(event =>
+      Object.keys(fields).reduce((index, key) => {
+        index[key] = dlv(event, fields[key])
+        return index
+      }, {})
+    )
+    .map(event =>
+      Object.assign({}, event, {
+        url: event.url.split('?')[0],
+        date: format(event.date, 'dddd, Do MMMM'),
+        time: format(event.date, 'HH:mm'),
+        tags:
+          event.category && event.format
+            ? `#${event.category} #${event.format}`
+            : '(no tags)',
+      })
+    )
     .reduce((index, event) => {
       if (!index[event.date]) {
         index[event.date] = []
@@ -58,15 +65,23 @@ const parseEvents = events => {
     }, {})
 }
 
-const pages = Array.from(new Array(20)).map((_, i) => i + 1)
-const promiseFuns = pages.map(page => () => delay(Math.random() * 1000)
-  .then(() => {
-    console.warn(new Date().toISOString(), 'fetching page', page)
-    return fetchEvents(page)
-  }))
+const pages = Array.from(new Array(10)).map((_, i) => i + 1)
+const promiseFuns = pages.map(page => () =>
+  delay(Math.random() * 10000)
+    .then(() => {
+      console.warn(new Date().toISOString(), 'fetching page', page)
+      return fetchEvents(page)
+    })
+    .catch(error => {
+      console.error(`page ${page} errorred`)
+      console.error(error)
+    })
+)
 
 pSeries(promiseFuns)
-  .then(reses => reses.reduce((i, res) => i.concat(res.events), []))
+  .then(reses =>
+    reses.filter(Boolean).reduce((i, res) => i.concat(res.events), [])
+  )
   .then(parseEvents)
   .then(render)
   .catch(err => console.error(err))
