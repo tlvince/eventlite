@@ -8,7 +8,8 @@
     "postbuild": "rm -rf build && mkdir build",
     "poststart": "echo eventlite.tlvince.com > build/CNAME",
     "prestart": "npm run build",
-    "start": "node -r dotenv/config dist/eventlite.js > build/index.html"
+    "start": "node -r dotenv/config dist/eventlite.js > build/index.html",
+    "test": "npm run build"
   },
   "repository": {
     "type": "git",
