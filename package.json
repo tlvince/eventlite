@@ -36,7 +36,7 @@
     "p-series": "2.1.0",
     "querystringify": "2.0.0",
     "react": "16.2.0",
-    "react-dom": "16.2.0",
+    "react-dom": "16.2.1",
     "simple-get-promise": "2.0.1"
   },
   "devDependencies": {
