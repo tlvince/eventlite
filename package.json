@@ -33,7 +33,7 @@
     "delay": "2.0.0",
     "dlv": "1.1.1",
     "p-series": "1.0.0",
-    "querystringify": "1.0.0",
+    "querystringify": "2.0.0",
     "react": "16.2.0",
     "react-dom": "16.2.0",
     "simple-get-promise": "1.0.2"
