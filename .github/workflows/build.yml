@@ -1,10 +1,10 @@
-name: Publish
+name: Build
 on:
   push:
     branches:
       - master
 jobs:
-  build-and-publish:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
