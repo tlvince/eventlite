@@ -3,7 +3,7 @@
   "description": "Lightweight Eventbrite",
   "version": "2.0.0",
   "scripts": {
-    "build": "microbundle --external all --compress false --sourcemap false -f cjs --jsx React.createElement -o dist",
+    "build": "microbundle --no-compress --no-sourcemap -f cjs --jsx React.createElement -o dist",
     "lint": "eslint '*.js' 'src/**/*.js'",
     "postbuild": "rm -rf build && mkdir build",
     "poststart": "echo eventlite.tlvince.com > build/CNAME",
@@ -49,7 +49,7 @@
     "eslint-plugin-react": "7.16.0",
     "husky": "3.0.9",
     "lint-staged": "9.4.2",
-    "microbundle": "0.4.4",
+    "microbundle": "0.11.0",
     "prettier": "1.19.1"
   }
 }
