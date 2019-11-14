@@ -16,3 +16,4 @@ jobs:
           BRANCH: gh-pages
           FOLDER: build
           BUILD_SCRIPT: npm ci && npm start
+          EVENTBRITE_TOKEN: ${{ secrets.EVENTBRITE_TOKEN }}
