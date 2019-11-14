@@ -2,6 +2,7 @@ import dlv from 'dlv'
 import delay from 'delay'
 import pSeries from 'p-series'
 import format from 'date-fns/format'
+import parseISO from 'date-fns/parseISO'
 import { get, asJson } from 'simple-get-promise'
 import { stringify } from 'querystringify'
 
@@ -45,17 +46,18 @@ const parseEvents = events => {
         return index
       }, {})
     )
-    .map(event =>
-      Object.assign({}, event, {
+    .map(event => {
+      const date = parseISO(event.date)
+      return Object.assign({}, event, {
         url: event.url.split('?')[0],
-        date: format(event.date, 'dddd, Do MMMM'),
-        time: format(event.date, 'HH:mm'),
+        date: format(date, 'EEEE, do MMMM'),
+        time: format(date, 'HH:mm'),
         tags:
           event.category && event.format
             ? `#${event.category} #${event.format}`
             : '(no tags)',
       })
-    )
+    })
     .reduce((index, event) => {
       if (!index[event.date]) {
         index[event.date] = []
