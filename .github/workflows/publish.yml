@@ -17,3 +17,4 @@ jobs:
           FOLDER: build
           BUILD_SCRIPT: npm ci && npm start
           EVENTBRITE_TOKEN: ${{ secrets.EVENTBRITE_TOKEN }}
+          EVENTBRITE_SEARCH_PAGES_LIMIT: ${{ secrets.EVENTBRITE_SEARCH_PAGES_LIMIT }}
