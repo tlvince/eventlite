@@ -67,7 +67,8 @@ const parseEvents = events => {
     }, {})
 }
 
-const pages = Array.from(new Array(10)).map((_, i) => i + 1)
+const totalPages = parseInt(process.env.EVENTBRITE_SEARCH_PAGES_LIMIT, 10)
+const pages = Array.from(new Array(totalPages)).map((_, i) => i + 1)
 const promiseFuns = pages.map(page => () =>
   delay(Math.random() * 10000)
     .then(() => {
