@@ -35,7 +35,7 @@
     "dlv": "1.1.3",
     "p-series": "2.1.0",
     "querystringify": "2.1.1",
-    "react": "16.11.0",
+    "react": "16.12.0",
     "react-dom": "16.12.0",
     "simple-get-promise": "2.0.1"
   },
