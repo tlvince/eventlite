@@ -1,15 +1,17 @@
 # eventlite
 
-[![License][license-image]][license-url]
-
-[license-url]: https://opensource.org/licenses/MIT
-[license-image]: https://img.shields.io/npm/l/eventlite.svg
-
 > Lightweight Eventbrite
 
 Shows a list of free local events.
 
 https://eventlite.tlvince.com/
+
+## Usage
+
+Requires the following env vars:
+
+- `EVENTBRITE_TOKEN`: Eventbrite API token
+- `EVENTBRITE_SEARCH_PAGES_LIMIT`: the total number of API pages of the `/search` endpoint to request
 
 ## License
 
