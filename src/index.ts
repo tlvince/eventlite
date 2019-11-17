@@ -1,18 +1,18 @@
-import dlv from 'dlv'
-import delay from 'delay'
-import pSeries from 'p-series'
+import delay from 'delay' // eslint-disable-line import/default
+import pSeries from 'p-series' // eslint-disable-line import/default
 import format from 'date-fns/format'
 import parseISO from 'date-fns/parseISO'
-import { get, asJson } from 'simple-get-promise'
+import { get, asJson } from 'simple-get-promise' // eslint-disable-line import/no-unresolved
 import { stringify } from 'querystringify'
 
 import render from './render'
 
-const fetchEvents = page => {
+const fetchEvents = (page: number) => {
   const api = 'https://www.eventbriteapi.com/v3/events/search/'
 
   const query = {
-    sort_by: 'date',
+    page,
+    sort_by: 'date', // eslint-disable-line @typescript-eslint/camelcase
     'location.within': '5km',
     'location.latitude': '51.5006807',
     'location.longitude': '-0.0574745',
@@ -21,34 +21,24 @@ const fetchEvents = page => {
     expand: 'category,format',
   }
 
-  if (page) {
-    query.page = page
-  }
-
   const url = `${api}?${stringify(query)}`
   return get(url).then(asJson)
 }
 
-const parseEvents = events => {
-  const fields = {
-    id: 'id',
-    url: 'url',
-    name: 'name.text',
-    date: 'start.local',
-    format: 'format.short_name_localized',
-    category: 'category.short_name_localized',
-  }
-
+const parseEvents = (events: Eventlite.EventbriteEvent[]): Eventlite.Events => {
   return events
-    .map(event =>
-      Object.keys(fields).reduce((index, key) => {
-        index[key] = dlv(event, fields[key])
-        return index
-      }, {})
-    )
-    .map(event => {
+    .map((event: Eventlite.EventbriteEvent) => ({
+      id: event?.id,
+      url: event?.url,
+      name: event?.name?.text,
+      date: event?.start?.local,
+      format: event?.format?.short_name_localized, // eslint-disable-line @typescript-eslint/camelcase
+      category: event?.category?.short_name_localized, // eslint-disable-line @typescript-eslint/camelcase
+    }))
+    .map((event: Eventlite.Event) => {
       const date = parseISO(event.date)
-      return Object.assign({}, event, {
+      return {
+        ...event,
         url: event.url.split('?')[0],
         date: format(date, 'EEEE, do MMMM'),
         time: format(date, 'HH:mm'),
@@ -56,7 +46,7 @@ const parseEvents = events => {
           event.category && event.format
             ? `#${event.category} #${event.format}`
             : '(no tags)',
-      })
+      }
     })
     .reduce((index, event) => {
       if (!index[event.date]) {
