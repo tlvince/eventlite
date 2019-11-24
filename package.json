@@ -5,10 +5,13 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
-    "lint": "eslint '*.js' 'src/**/*.ts{,x}'",
+    "eslint": "eslint '**/*.{js,jsx,ts,tsx,json}'",
+    "lint": "npm run eslint && npm run prettier -- --check",
+    "lint:fix": "npm run eslint -- --fix && npm run prettier -- --write",
     "postbuild": "rm -rf build && mkdir build",
     "poststart": "echo eventlite.tlvince.com > build/CNAME",
     "prestart": "npm run build",
+    "prettier": "prettier '**/*.{js,jsx,ts,tsx,json,css,md}'",
     "start": "node -r dotenv/config dist/index.js > build/index.html",
     "test": "npm run build"
   },
