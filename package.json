@@ -44,7 +44,7 @@
   },
   "devDependencies": {
     "@commitlint/config-conventional": "8.3.3",
-    "@types/node": "13.1.2",
+    "@types/node": "13.1.4",
     "@types/react": "16.9.17",
     "commitlint": "8.3.3",
     "dotenv": "8.2.0",
