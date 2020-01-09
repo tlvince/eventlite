@@ -34,7 +34,7 @@
     "node": ">=10"
   },
   "dependencies": {
-    "date-fns": "2.8.1",
+    "date-fns": "2.9.0",
     "delay": "4.3.0",
     "p-series": "2.1.0",
     "querystringify": "2.1.1",
