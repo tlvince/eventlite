@@ -10,9 +10,10 @@
     "lint:fix": "npm run eslint -- --fix && npm run prettier -- --write",
     "postbuild": "rm -rf build && mkdir build",
     "poststart": "echo eventlite.tlvince.com > build/CNAME",
-    "prestart": "npm run build",
+    "prepublish": "npm run build",
     "prettier": "prettier '**/*.{js,jsx,ts,tsx,json,css,md}'",
-    "start": "node -r dotenv/config dist/index.js > build/index.html",
+    "publish": "node -r dotenv/config dist/index.js > build/index.html",
+    "start": "echo 'Deprecated. See readme.'",
     "test": "npm run build"
   },
   "repository": {

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>-</title>
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h1 id="deprecated">Deprecated</h1>
+<p>Eventbrite have chosen to remove the API endpoint used to power Eventlite. Besides screen scraping, there’s no alternative, so this project is now shut down. Thank Eventbrite.</p>
+<p>The endpoint was silently removed on 2019-10-20, restored in a heavily throttled state ~2019-11 and finally shut down on 2019-12-12. See <a href="https://groups.google.com/forum/#!topic/eventbrite-api/-E0MG7THMsc">403 Forbidden when using events search API endpoint</a> and <a href="https://groups.google.com/forum/#!topic/eventbrite-api/FT2MsDswdrA">Event Search API to be Shut Down on Dec 12, 2019</a> for the backstory.</p>
+<hr />
+<h1 id="eventlite">eventlite</h1>
+<blockquote>
+<p>Lightweight Eventbrite</p>
+</blockquote>
+<p>Shows a list of free local events.</p>
+<p>https://eventlite.tlvince.com/</p>
+<h2 id="usage">Usage</h2>
+<p>Requires the following env vars:</p>
+<ul>
+<li><code>EVENTBRITE_TOKEN</code>: Eventbrite API token</li>
+<li><code>EVENTBRITE_SEARCH_PAGES_LIMIT</code>: the total number of API pages of the <code>/search</code> endpoint to request</li>
+</ul>
+<h2 id="license">License</h2>
+<p>Released under the <a href="https://tlvince.mit-license.org/">MIT License</a>.</p>
+</body>
+</html>
